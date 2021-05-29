@@ -1,0 +1,106 @@
+{{> agent_side_nav}}
+
+<div class="agent-main-wrapper">
+  {{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+      <div class="menu-add-nav">
+        {{> messages}}
+        <a href="/admin" style="color:black; font-size:20px; text-decoration:underline">Admin</a>
+        >
+        <a href="/admin/menus" style="color:black; font-size:20px; text-decoration:underline">Menus</a>
+        >
+        <a href="/admin/menus/{{menu_id}}" style="color:black; font-size:20px; text-decoration:underline">Edit Menu</a>
+        >
+        <h3 style="display: inline;">Add Items</h3>
+        <div class="menu-item-create-button quick-create">
+          <a href="/admin/menu_items/{{menu_id}}/quick_add">
+            <div class="create-button">
+              Quick create Menu Item
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="menu-details add">
+        {{# each menu}}
+        <h4>{{this.name}}</h4>
+        {{/each}}
+        <h5>Status: {{status}} </h5>
+        </h4>
+        <hr>
+        <div class="menu-items">
+          <table class="table table-bordered" id="mitems-table">
+            <thead>
+              <tr>
+                <th scope="col">Menu Item</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each items}}
+              <tr>
+                <td>
+                  <img class="menu-details-image" src="{{this.image}}" alt="{{this.name}}">
+                  <p>{{this.name}}</p>
+                </td>
+                <td>{{this.description}}</td>
+                <td>{{this.price}}</td>
+                <td class="add-menu-item-row">
+                  <form action="/admin/menus/{{../menu_id}}/add_item" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="item_id" value="{{this._id}}">
+                    <button type="submit" class="add-form-action">
+                      Add
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {{#if quick_add }}
+      <div class="separator" style="margin-left: 10px;"></div>
+      <div class="separator quick-add">
+        <h4>Create Menu Item</h4>
+        <div class="create-menu-item-form">
+          <form action="/admin/{{menu_id}}/menu_items/quick_add" method="post" enctype="multipart/form-data">
+            <div class="form-input">
+              <label for="name">Menu item name</label>
+              <input type="text" name="name" id="menu-item-name" required>
+            </div>
+            <div class="form-input">
+              <label for="price">Price</label>
+            </div>
+            <input type="number" name="price" id="menu-price" required>
+            <div class="form-input">
+              <label for="image">Menu Image</label>
+              <input type="file" name="image" id="menuItem_image" style="border: none;">
+            </div>
+            <div class="form-input"></div>
+            <button type="submit" class="form-action">Create</button>
+            <a href="/admin/menus/{{menu_id}}/add" class="cancel-button">Cancel</a>
+          </form>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    $('#mitems-table').DataTable({
+      "ordering": false,
+      "pageLength": 50,
+      "columnDefs": [{
+        "width": "40%",
+        "targets": 0
+      }]
+    })
+  });
+</script>

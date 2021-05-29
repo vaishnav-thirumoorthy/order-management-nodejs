@@ -1,0 +1,46 @@
+{{> agent_side_nav}}
+
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+      {{> messages }}
+      <div class="menu-settings-head">
+        <a href="/admin" style="color:black; font-size:20px; text-decoration:underline">Admin</a>
+        >
+        <h3 style="display: inline;">Menus</h3>
+        
+          <a href="/admin/new-menu">
+          <div class="menu-create-button">
+            <div>
+              Create Menu
+            </div>
+          </a>
+          </div>
+        </div>
+      <div class="active-menus">
+        <h4>Active Menus</h4>
+        <hr>
+        <div class="menu-list">
+          <ul>
+          {{#each activeMenu }}
+          <a href="/admin/menus/{{this._id}}"><li>{{this.name}}</li></a>
+          {{/each}}
+          </ul>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="inactive-menus">
+        <h4>Other Menus</h4>
+        <hr>
+        <div class="menu-list">
+          <ul>
+          {{#each inactiveMenu }}
+          <a href="/admin/menus/{{this._id}}"><li>{{this.name}}</li></a>
+          {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

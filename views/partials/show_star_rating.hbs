@@ -1,0 +1,16 @@
+<div class="order-rating">
+            <p>Thank you for your feedback</p>
+            <p>You've rated your order!</p>
+            {{#times rating}}
+            <div class="star-container show">
+                <input type="radio" name="rating" style="color: gold;">
+                <label class="fas fa-star" style="color: gold;"></label>
+            </div>  
+            {{/times}}
+            {{#times unrated}}
+            <div class="star-container show">
+                <input type="radio" name="rating">
+                <label class="fas fa-star"></label>
+            </div>
+            {{/times}}
+</div>

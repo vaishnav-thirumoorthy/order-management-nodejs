@@ -1,0 +1,31 @@
+
+<table id="cart-table">
+    <thead>
+        <tr>
+            <th>Items</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each order_items}}
+        <tr>
+            <td>
+                {{this.name}} 
+                    x 
+                {{this.quantity}}
+            </td>
+            <td>₹ {{this.price}}</td>
+        </tr>
+        {{/each}}
+        <tr>
+            <td style="border-top:1px solid black;">Total:</td>
+            <td style="border-top:1px solid black;">₹ {{total}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+        $(document).ready( function () {
+    $('#cart-table').DataTable({"ordering": false})
+});
+</script>

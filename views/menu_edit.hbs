@@ -1,0 +1,136 @@
+{{> agent_side_nav}}
+
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+        {{> messages }}
+        <a href="/admin" style="color:black; font-size:20px; text-decoration:underline">Admin</a>
+        >
+        <a href="/admin/menus" style="color:black; font-size:20px; text-decoration:underline">Menus</a>
+        >
+        <h3 style="display: inline;">Edit Menu</h3>
+        <div class="menu-options-container">
+                <div class="menu-active-inactive">
+                {{#if active}}
+                <form action="/admin/menus/{{menu_id}}" method="post">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="status" value="2">
+                <button type="submit" class="form-action">Set as Inactive</button>
+                </form>
+                {{/if}}
+                {{#if inactive}}
+                <form action="/admin/menus/{{menu_id}}" method="post">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="status" value="1">
+                <button type="submit" class="form-action">Set as Active</button>
+                </form>
+                {{/if}}
+                </div>
+        </div>
+            <a href="/admin/menus/{{menu_id}}/add" class="add-menu-items-link">
+                <div class="add-menu-items">
+                Add Items
+                </div>
+            </a>
+             
+        <div class="menu-details">
+            {{#if edit}}
+            {{# each menu}}
+            <form action="/admin/menus/{{../menu_id}}" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" name="name" value="{{this.name}}" required>
+            <button type="submit" style="border: none; cursor:pointer"><i class="fas fa-check" style="background-color: white;"></i></button>
+            <a href="/admin/menus/{{../menu_id}}"><i class="fas fa-window-close" style="margin-left: 10px; color:black"></i></a>
+            {{/each}}
+            </form>
+            {{/if}}
+            {{#if view}}
+            {{# each menu}}
+            <h4 style="display: inline;">{{this.name}}</h4>
+            <a href="/admin/menus/{{../menu_id}}/edit" style="margin-left: 10px; display:inline"><i class="fas fa-edit"></i></a>
+            <div style="display: inline; margin-left:10px">
+            <form action="/admin/menus/{{this._id}}" method="post" style="display: inline;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="delete-menu" style="border: none; cursor:pointer">
+                <i class="far fa-trash-alt"></i>
+                </button>
+            </form>
+            </div>
+            {{/each}}
+            {{/if}}
+            <br>
+            <br>
+            <h5>Status: {{status}}</h5></h4>
+            <hr>
+            <div class="menu-items">
+                 <table class="table table-bordered" id="mitems-table">
+                     <thead>
+                        <tr>
+                        <th scope="col">Menu Item</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each items}}
+                        <tr>
+                            <td>
+                                <img class="menu-details-image" src="{{this.image}}" alt="{{this.name}}">
+                                <p>{{this.name}}</p>
+                            </td>
+                            <td>{{this.description}}</td>
+                            <td>{{this.price}}</td>
+                            <td class="edit-options" style="text-align: center;">
+                                <a href="/admin/menu_items/{{this._id}}"><i class="far fa-edit"></i></a>
+                                <form action="/admin/menus/{{../menu_id}}/menu_items/{{this._id}}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="delete-menu-item">
+                                <i class="far fa-trash-alt"></i>
+                                </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                 </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    $(document).ready( function () {
+    $('#mitems-table').DataTable({
+        "ordering": false, 
+        "pageLength": 30, 
+        "columnDefs": [{ "width": "30%", "targets": 0 }]
+        })
+    });
+
+    $('.delete-menu-item').on('click', function(){
+        if (window.confirm('Deleting an item will only remove it from the menu. The item will be available in Menu Items. Do you wish to proceed?'))
+            {
+                console.log('Item deleted')
+            }
+            else
+            {
+                event.preventDefault()
+            }
+    })
+
+    $('.delete-menu').on('click', function(){
+        if (window.confirm('Deleting a menu is irreversible. Do you wish to proceed?'))
+            {
+                console.log('Item deleted')
+            }
+            else
+            {
+                event.preventDefault()
+            }
+    })
+
+</script>

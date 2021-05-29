@@ -1,0 +1,33 @@
+{{> agent_side_nav}}
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper customers">
+    <div class="admin-settings customers">
+        {{> messages }}
+        <div class="user-details-wrapper">
+            <div class="user-details-card">
+                <p><strong>User Details</strong></p>
+                {{#each user}}
+                <p><strong>Name</strong>: {{this.name}}</p>
+                <p><strong>Email address</strong>: {{this.email}}</p>
+                {{/each}}
+            </div>
+            <div class="user-details-order-history">
+                <div class="order-list-title">
+                <p><strong>Order History</strong></p>
+                {{#unless orders }}
+                <p>There are no orders here.....</p>
+                {{/unless}}
+                {{#each orders}}
+                <div class="order-details-holder">
+                        <a href="/a/orders/{{this.order_number}}">Details</a>
+                        <p><strong>Order Number</strong> : #{{this.order_number}}</p> 
+                        <p><strong>Total</strong>: ₹{{this.total}}</p> 
+                        <p><strong>Status</strong>: {{#ifEquals this.status 1}} Pending {{/ifEquals}}{{#ifEquals this.status 2}} Delivered {{/ifEquals}}</p> 
+                    </div>
+                {{/each}}
+                </div>
+            </div>
+        </div>
+  </div>
+</div>

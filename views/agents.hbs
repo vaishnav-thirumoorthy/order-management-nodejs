@@ -1,0 +1,75 @@
+{{> agent_side_nav}}
+
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+      {{> messages }}
+      <div class="agents-table-wrapper">
+      <div class="agent-list-title">
+        <a href="/admin" style="color:black; font-size:20px">Admin</a>
+        >
+        <h3 style="display:inline">Agents</h3>
+      </div>
+      <a href="/admin/agents/manage">
+        <div class="agent-create">
+          <button class="create-agent-button">Create agent</button>
+        </div>
+      </a>
+        <table class="table table-bordered" id="agents-table">
+        <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#each agents}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.role_name}}</td>
+              <td class="edit-options">
+                {{#ifEquals this.email ../email }}
+                <a href="/admin/agents/{{this._id}}"><i class="far fa-edit"></i></a>
+                {{/ifEquals}}
+                {{#ifEquals this.role 3}}
+                <a href="/admin/agents/{{this._id}}"><i class="far fa-edit"></i></a>
+                <form action="/admin/agents/{{this._id}}" method="post">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="delete-agent">
+                  <i class="far fa-trash-alt"></i>
+                  </button>
+                </form>
+                {{/ifEquals}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$(document).ready( function () {
+    $('#agents-table').DataTable({"ordering": false, "pageLength": 20})
+});
+
+$('.delete-agent').on("click", function(event){
+  if (window.confirm('Are you sure you want to delete this user?'))
+  {
+      console.log('Agent deleted')
+  }
+  else
+  {
+    event.preventDefault()
+  }
+  
+});
+
+</script>

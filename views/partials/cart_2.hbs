@@ -1,0 +1,42 @@
+<div class="separator"></div>
+                    <div class="cart-wrapper">
+                    <div class="cart-name" style="margin-bottom: 30px;"><h4>Your Cart</h4></div>
+                    <table id="cart-table" class="row-border">
+                    <thead>
+                        <tr>
+                            <th>Items</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each cart_items}}
+                        <tr>
+                            <td>
+                                {{this.name}} 
+                                 x 
+                                <form class="add-remove-from-cart" action="/orders/remove_from_cart/{{../cart_id}}?from_orders" method="post">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="item_id" value="{{this.item_id}}">
+                                    <input type="hidden" name="name" value="{{this.name}}">
+                                    <input type="hidden" name="value" value="{{this.value}}">
+                                    <button type="submit"><i class="fas fa-minus"></i></button>
+                                </form> 
+                                {{this.quantity}}
+                                <form class="add-remove-from-cart" action="/orders/add_to_cart/{{../cart_id}}?from_orders" method="post">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="item_id" value="{{this.item_id}}">
+                                    <input type="hidden" name="name" value="{{this.name}}">
+                                    <input type="hidden" name="value" value="{{this.value}}">
+                                    <button type="submit"><i class="fas fa-plus"></i></button>
+                                </form>
+                            </td>
+                            <td>{{this.price}}</td>
+                        </tr>
+                        {{/each}}
+                        <tr>
+                            <td style="border-top:1px solid black;">Total:</td>
+                            <td style="border-top:1px solid black;">{{total}}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>

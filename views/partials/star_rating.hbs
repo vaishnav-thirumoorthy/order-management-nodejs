@@ -1,0 +1,24 @@
+<div class="order-rating">
+            <p>We would like your feedback to improve our service</p>
+            <p>How satisfied are you with your order?</p>
+            <form class="star-rating" action="/orders/{{order_number}}/rating" method="post">
+              <div class="star-container">
+                <input type="radio" name="rating" value="5" id="rating-5">
+                <label for="rating-5" class="fas fa-star"></label>
+    
+                <input type="radio" name="rating" value="4" id="rating-4">
+                <label for="rating-4" class="fas fa-star"></label>
+                
+                <input type="radio" name="rating" value="3" id="rating-3">
+                <label for="rating-3" class="fas fa-star"></label>                
+                
+                <input type="radio" name="rating" value="2" id="rating-2">
+                <label for="rating-2" class="fas fa-star"></label>
+
+                <input type="radio" name="rating" value="1" id="rating-1">
+                <label for="rating-1" class="fas fa-star"></label>
+              </div>  
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+</div>

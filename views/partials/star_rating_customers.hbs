@@ -1,0 +1,17 @@
+<div class="order-rating">
+            {{#each user}}
+            <p>{{this.name}} has rated the order</p>
+            {{/each}}
+            {{#times rating}}
+            <div class="star-container show">
+                <input type="radio" name="rating" style="color: gold;">
+                <label class="fas fa-star" style="color: gold;"></label>
+            </div>  
+            {{/times}}
+            {{#times unrated}}
+            <div class="star-container show">
+                <input type="radio" name="rating">
+                <label class="fas fa-star"></label>
+            </div>
+            {{/times}}
+</div>

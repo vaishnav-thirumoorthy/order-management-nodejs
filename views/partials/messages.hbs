@@ -1,0 +1,41 @@
+{{#if message}}
+<div class="success-alert">
+  {{message}}
+  <button class="close-alert success close" type="button" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}
+
+{{#if success_msg}}
+<div class="success-alert">
+  {{success_msg}}
+  <button class="close-alert success close" type="button" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}
+
+{{#if error_msg}}
+<div class="error-alert">
+  {{error_msg}}
+  <button class="close-alert error close" type="button" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}
+
+{{#each error}}
+<div class="error-alert">
+  {{this}}
+  <button class="close-alert error close" type="button" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/each}}
+
+<script>
+    $('.close-alert').on('click', function (){
+        $('.close-alert').parent().remove()
+    });
+</script>

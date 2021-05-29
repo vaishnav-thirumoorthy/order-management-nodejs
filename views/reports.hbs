@@ -1,0 +1,60 @@
+{{> agent_side_nav }}
+
+<div class="agent-main-wrapper">
+    {{> agent_header }}
+    <div class="admin-wrapper">
+        <div class="admin-settings reports">
+            {{> messages }}
+            <div class="reports-data">
+                <div class="overview-data">
+                    {{#unless orders}}
+                    <h4>No data to visualise</h4>
+                    {{/unless}}
+                    {{#if orders}}
+                    <p><strong>Number of orders: </strong>{{number}}</p>
+                    <p><strong>Total Value: </strong>₹ {{sum}}</p>
+                    {{/if}}
+                </div>
+                {{#if orders}}
+                <h4>Underlying data</h4>
+                {{> orders_all_table_reports }}
+                {{/if}}
+            </div>
+            <div class="reports-filter">
+                <h4>Filters</h4>
+                <form class="filter-form" action="/admin/reports/filter" method="POST">
+                    <p><strong>Enter Order date range</strong></p>
+                    <label for="start-date">Start Date : </label>
+                    <input type="datetime-local" name="start_time" id="start-date" value="{{start_date}}" required>
+                    <label for="end-date">End Date : </label>
+                    <input type="datetime-local" name="end_time" id="end-date" value="{{end_date}}" required>
+                    <button type="submit" class="form-action">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let start = $('#start-date').val().substring(0, 10)
+        let end = $('#end-date').val().substring(0, 10)
+        $('#all-orders-table-reports').DataTable({
+            "ordering": false,
+            "pageLength": 10,
+            "columnDefs": [{
+                "width": "30%"
+            }],
+            "dom": 'Bfrtip',
+            "buttons": [{
+                "extend": 'csv',
+                "className": 'form-action',
+                "text": "Download tabluar data",
+                title: `${start}_${end}_order_details`,
+                "exportOptions": {
+                    "columns": [0, 1, 2, 4]
+                }
+            }]
+        })
+    });
+</script>

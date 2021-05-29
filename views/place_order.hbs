@@ -1,0 +1,30 @@
+{{> customer_header }}
+{{> messages }}
+<div class="customer-wrapper">
+        <div class="customer-menu-wrapper">
+            <h2>Place your order</h2>
+            <br>
+            <h4>Pick your menu and add items from the menu</h4>
+            <div class="show-menu">
+                {{#each menu}}
+                <div class="menu-and-items">
+                    <a href="/orders/menus/{{this._id}}/add_items">
+                    <h4>{{this.name}}</h4>
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{#if cart_items}}
+        {{> cart_2 }}        
+        {{> checkout_cancel }}
+        {{/if}}
+</div>
+
+
+<script>
+    $(document).ready( function () {
+    $('#cart-table').DataTable({"ordering": false})
+});
+</script>
+

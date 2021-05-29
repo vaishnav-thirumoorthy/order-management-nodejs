@@ -1,0 +1,32 @@
+{{> agent_side_nav}}
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+      {{> messages }}
+        <a href="/admin" style="color:black; font-size:20px; text-decoration:underline">Admin</a>
+        >
+        <a href="/admin/menu_items" style="color:black; font-size:20px; text-decoration:underline">Menu Items</a>
+        >
+        <h3 style="display: inline;">Edit Menu Item</h3>
+        <div class="create-menu-item-form">
+        <form action="/admin/menu_items/{{item_id}}" method="post" enctype="multipart/form-data">
+        <div class="form-input">
+        <label for="name">Menu item name</label>
+        <input type="text" name="name" id="menu-item-name" value="{{name}}">
+        </div>
+        <div class="form-input">
+        <label for="price">Price</label>
+        <input type="number" name="price" id="menu-price" value="{{price}}">
+        </div>
+        <div class="form-input">
+        <label for="image">Menu Image</label>
+        <input type="file" name="image" id="menuItem_image" style="border: none;">
+        </div>
+        <div class="form-input"></div>
+        <button type="submit" class="form-action">Update</button>
+        </form>
+        </div>
+    </div>
+  </div>
+</div>

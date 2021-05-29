@@ -1,0 +1,49 @@
+{{> agent_side_nav}}
+
+<div class="agent-main-wrapper">
+  {{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+      {{> messages }}
+      <div class="agent-create-wrapper">
+        <div class="agent-form-title">
+          {{#if create}}
+          <h3>Create agent</h3>
+          {{else if update}}
+          <h3>Edit agent</h3>
+          {{/if}}
+        </div>
+        <div class="agent-form-wrapper">
+          <form {{#if create}}action="/agents" {{else if update}}action="/agents/{{agent._id}}" {{/if}} method="post">
+            {{#if update}}<input type="hidden" name="_method" value="PUT">{{/if}}
+            <div class="form-input">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="agent-name" value="{{agent.name}}" required>
+            </div>
+            <div class="form-input">
+              <label for="email">Email Address</label>
+              <input type="email" name="email" id="agent-email" value="{{agent.email}}" required>
+            </div>
+            <div class="form-input">
+              <label for="role">Role</label>
+              <select name="role" id="agent-role" required>
+                <option selected>Choose a role</option>
+                <option value="2">Administrator</option>
+                <option value="3">Supervisor</option>
+              </select>
+            </div>
+            <div class="form-input">
+              {{#if update}}
+              <button type="submit" class="form-action">Update agent</button>
+              {{else if create}}
+              <button type="submit" class="form-action">Create agent</button>
+              {{/if}}
+              <a href="/admin/agents" class="cancel-button">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

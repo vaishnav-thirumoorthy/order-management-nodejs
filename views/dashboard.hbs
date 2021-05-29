@@ -1,0 +1,28 @@
+{{> agent_side_nav }}
+
+<div class="agent-main-wrapper">
+{{> agent_header }}
+<div class="admin-wrapper">
+    <div class="admin-settings">
+        {{> messages }}
+        <div class="pending-orders-list">
+            <h4>Pending orders ({{number}})</h4>
+            {{#unless orders }}
+                <p>Yay! There are pending orders</p>
+            {{/unless}}
+            {{#each orders}}
+            <a href="/a/orders/{{this.order_number}}">
+                <div class="pending-order-details">
+                    <p><strong>Order Number</strong> : #{{this.order_number}}</p> 
+                    <p><strong>Total</strong>: ₹ {{this.total}}</p> 
+                    <p><strong>Status</strong>: {{#ifEquals this.status 1}} Pending {{/ifEquals}}</p> 
+                </div>
+            </a>
+            {{/each}}
+        </div>
+        <div class="walk-in-customer">
+            <p>Is there a walk-in-customer? <a class="form-action" href="/orders/walkin/new" target="_blank">Place Order</a></p>
+        </div>
+    </div>
+</div>
+</div>

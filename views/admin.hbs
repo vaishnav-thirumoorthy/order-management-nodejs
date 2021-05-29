@@ -1,0 +1,52 @@
+{{> agent_side_nav}}
+
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper">
+    <div class="admin-settings">
+      <div class="settings-section">
+        {{> messages }}
+        <div class="settings-wrapper">
+            <h3>Users</h3>
+            <hr>
+            <a href="/admin/agents" class="settings-link">
+            <div class="settings-item">
+              <i class="fas fa-users"></i>
+              <span class="setting-title">Agents</span>
+            </div>
+            </a>
+        </div>
+      </div>
+      <div class="settings-section">
+         <div class="settings-wrapper">
+            <h3>Menu and Menu Items</h3>
+            <hr>
+            <a href="/admin/menus" class="settings-link">
+            <div class="settings-item">
+              <i class="fas fa-utensils"></i>
+              <span class="setting-title">Menu</span>
+            </div>
+            </a>
+            <a href="/admin/menu_items" class="settings-link">
+            <div class="settings-item">
+              <i class="fas fa-hamburger"></i>
+              <span class="setting-title">Menu Items</span>
+            </div>
+            </a>
+        </div>
+      </div>
+      <div class="settings-section">
+              <div class="settings-wrapper">
+            <h3>Reports</h3>
+            <hr>
+            <a href="/admin/reports" class="settings-link">
+            <div class="settings-item">
+              <i class="fas fa-table"></i>
+              <span class="setting-title">Reports</span>
+            </div>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+         <div class="all-orders-table-container-reports">
+                    <table class="table table-bordered" id="all-orders-table-reports">
+        <thead>
+            <tr>
+              <th scope="col">Order ID</th>
+              <th scope="col">Date</th>
+              <th scope="col">Total</th>
+              <th scope="col">Invoice</th>
+              <th scope="col">Status</th>
+              <th scope="col">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#each orders}}
+            <tr>
+              <td><a href="/a/orders/{{this.order_number}}">#{{this.order_number}}</a></td>
+              <td>{{formatDate this.created_at "short"}}</td> 
+              <td>₹ {{this.total}}</td>
+              <td><a href="/orders/{{this.order_number}}/invoice", target="_blank">#{{this.order_number}}_invoice</a></td>
+              <td>{{#ifEquals this.status 1}} Pending {{/ifEquals}}{{#ifEquals this.status 2}} Delivered {{/ifEquals}}</td>
+              <td>
+              {{#times this.rating}}
+                <div class="star-container show">
+                <input type="radio" name="rating" style="color: gold;">
+                <label class="fas fa-star" style="color: gold;"></label>
+                </div>  
+              {{/times}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+            </div>

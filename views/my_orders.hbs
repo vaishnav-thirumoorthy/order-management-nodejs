@@ -1,0 +1,30 @@
+{{> customer_header }}
+{{> messages }}
+<div class="order-history">
+    <div class="orders-list">
+        <div class="orders-list-card">
+            <div class="order-list-title">
+                <h3>My Orders</h3>
+                <nav class="order-list-filter">
+                    <ul>
+                        <a href="/orders/my_orders"><li>All Orders</li></a>
+                        <a href="/orders/my_orders?status=pending"><li>Pending Orders</li></a>
+                    </ul>
+                </nav>
+                {{#if empty }}
+                <p>There are no orders here.....Why don't you <a style="color:#2753d7; text-decoration:underline" href="/orders/new">order</a> one now?</p>
+                {{/if}}
+                {{#each order}}
+                <div class="order-details-holder">
+                        <a href="/orders/my_orders/{{this.order_number}}">Details</a>
+                        <h5>Order Number: #{{this.order_number}}</h5>
+                        <h5>Total: ₹{{this.total}}</h5>
+                        <h5>Status: {{#ifEquals this.status 1}} Pending {{/ifEquals}}{{#ifEquals this.status 2}} Delivered {{/ifEquals}}</h5>
+                    </div>
+                {{/each}}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

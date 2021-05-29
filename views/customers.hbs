@@ -1,0 +1,37 @@
+{{> agent_side_nav}}
+<div class="agent-main-wrapper">
+{{> agent_header }}
+  <div class="admin-wrapper customers">
+    <div class="admin-settings customers">
+      <div class="customers-section-wrapper">
+        {{> messages }}
+        <div class="customers-list-title">
+          <h4>All customers</h4>
+        </div>
+        <table class="table" id="users-table">
+        <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#each users}}
+            <tr>
+              <td><a href="/a/users/{{this._id}}">{{this.name}}</a></td>
+              <td>{{this.email}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready( function () {
+    $('#users-table').DataTable({"ordering": false, "pageLength": 25, "columnDefs": [
+    { "width": "30%"}]})
+});
+
+</script>

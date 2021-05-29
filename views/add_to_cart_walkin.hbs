@@ -1,0 +1,49 @@
+{{> customer_header }}
+{{> messages }}
+<div class="customer-wrapper">
+    <div class="customer-menu-wrapper">
+        <h2>Place your order</h2>
+        <br>
+        <h4>Choose items from the menu and add them to your cart</h4>
+        <div class="show-menu">
+
+            <div class="menu-and-items add-to-cart">
+                <a href="/orders/walkin/new">Menus</a>
+                >
+                {{#each menu}}
+                <h4 style="display: inline;">{{this.name}}</h4>
+                {{/each}}
+                <br>
+                <br>
+                <hr>
+            </div>
+            {{#each item}}
+            <div class="order-menu-items">
+                <img src="{{this.image}}" alt="{{this.name}}" style="width: 100px; height:100px">
+                <p>{{this.name}}</p>
+                <p>₹ {{this.price}}</p>
+                <form action="/orders/walkin/add_to_cart/{{../cart_id}}" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="item_id" value="{{this._id}}">
+                    <input type="hidden" name="name" value="{{this.name}}">
+                    <input type="hidden" name="value" value="{{this.price}}">
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{#if cart_items }}
+    {{> cart_1_walkin }}
+    {{> checkout_cancel_walkin }}
+    {{/if}}
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#cart-table').DataTable({
+            "ordering": false
+        })
+    });
+</script>
